@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <main class="kanban-board">
+
+        <nav class="navbar">
+            <div class="navbar-container">
+                <h1 class="logo">Kanban Board</h1>
+                <div class="navbar-buttons">
+                    <button class="add-task-btn">
+                        Add Item
+                    </button>
+                    <button class="clear-board-btn" title="Clear all tasks">
+                        Reset Board
+                    </button>
+                    <a href="#" class="source-code-btn">Source Code</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="column todo">
+            <div class="column-header">
+                <div class="column-status-indicator"></div>
+                <div class="column-title">To Do</div>
+                <div class="column-count">3</div>
+            </div>
+            <div class="task-list">
+                <div class="task Urgent" draggable="true" data-task-id="task-1">
+                    <div class="task-actions">
+                        <button class="task-action-btn edit-btn" title="Edit task"><i class="fas fa-edit"></i></button>
+                        <button class="task-action-btn delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="task-status Urgent">Urgent</div>
+                    <div class="task-title">Finalize design system</div>
+                    <div class="task-tags">
+                        <span class="task-tag">Design</span>
+                    </div>
+                    <div class="task-datetime"><i class="far fa-clock"></i> 10:30 AM, 03-08-2025</div>
+                </div>
+            </div>
+            <div class="add-task">
+                <button class="add-task-button">
+                    <span>+</span>
+                    <span>Add Item</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="column doing">
+            <div class="column-header">
+                <div class="column-status-indicator"></div>
+                <div class="column-title">Doing</div>
+                <div class="column-count">3</div>
+            </div>
+            <div class="task-list">
+                <div class="task High" draggable="true" data-task-id="task-4">
+                    <div class="task-actions">
+                        <button class="task-action-btn edit-btn" title="Edit task"><i class="fas fa-edit"></i></button>
+                        <button class="task-action-btn delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="task-status High">High</div>
+                    <div class="task-title">API integration</div>
+                    <div class="task-tags">
+                        <span class="task-tag">Backend</span>
+                    </div>
+                    <div class="task-datetime"><i class="far fa-clock"></i> 9:20 AM, 03-07-2025</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column done">
+            <div class="column-header">
+                <div class="column-status-indicator"></div>
+                <div class="column-title">Done</div>
+                <div class="column-count">3</div>
+            </div>
+            <div class="task-list">
+                <div class="task Medium" draggable="true" data-task-id="task-7">
+                    <div class="task-actions">
+                        <button class="task-action-btn edit-btn" title="Edit task"><i class="fas fa-edit"></i></button>
+                        <button class="task-action-btn delete-btn" title="Delete task"><i class="fas fa-trash"></i></button>
+                    </div>
+                    <div class="task-status Medium">Medium</div>
+                    <div class="task-title">Login page redesign</div>
+                    <div class="task-tags">
+                        <span class="task-tag">UI</span>
+                    </div>
+                    <div class="task-datetime"><i class="far fa-clock"></i> 11:15 AM,  03-05-2025</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal">
+                <div class="form-group">
+                    <label for="taskStatus">Priority</label>
+                    <select id="taskStatus" required>
+                        <option value="Urgent" selected>Urgent</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="taskTitle">Task Title</label>
+                    <input type="text" id="taskTitle" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="taskTags">Tags (comma separated)</label>
+                    <input type="text" id="taskTags" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancel</button>
+                    <button type="submit" class="add-task-in-column">Add Task</button>
+                </div>
+                <input type="hidden" id="editTaskId" value="">                  
+            </div>
+        </div>
+
+        <!-- Confirmation Dialog -->
+        <div class="confirm-dialog" id="confirmDialog" style="display: none;">
+            <h3>Delete Task</h3>
+            <p>Are you sure you want to delete this task?</p>
+            <div class="confirm-dialog-buttons">
+                <button class="confirm-dialog-cancel">Cancel</button>
+                <button class="confirm-dialog-confirm">Delete</button>
+            </div>
+            <input type="hidden" id="deleteTaskId" value="">
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast">
+            <i class="fas fa-check-circle"></i>
+            <span id="toastMessage">Task updated successfully!</span>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
